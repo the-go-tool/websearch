@@ -64,3 +64,11 @@ soon
 > IP may be banned for several minutes.
 > So, if you have your personal/home project or you
 > don't want pay then choose unofficial.
+
+### :star: Please, star it if you find it helpful
+
+### :link: Similar projects
+If it doesn't fit.
+- :link: https://github.com/serpapi/google-search-results-golang
+- :link: https://github.com/rocketlaunchr/google-search
+- :link: https://github.com/schollz/googleit

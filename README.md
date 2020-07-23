@@ -21,16 +21,6 @@ Supports now:
 - [ ] DuckDuckGo
 - [ ] More: Google, Yandex, Bing, Yahoo etc
 
-## :question: Q/A
-
-> **Q:** Should I use **unofficial** providers?  
-> **A:** Maybe. It depends on stability you expect.
-> Official APIs require they token and may take taxes.
-> Unofficial APIs are free, but they are unstable and your
-> IP may be banned for several minutes.
-> So, if you have your personal/home project or you
-> don't want pay then choose unofficial.
-
 ## :fast_forward: Fast Start
 
 ### :arrow_down: Get It
@@ -64,3 +54,13 @@ res, err := web.Search("test", 25)
 
 ## :arrow_forward: More Detailed Start
 soon
+
+## :question: Q/A
+
+> **Q:** Should I use **unofficial** providers?  
+> **A:** Maybe. It depends on stability you expect.
+> Official APIs require they token and may take taxes.
+> Unofficial APIs are free, but they are unstable and your
+> IP may be banned for several minutes.
+> So, if you have your personal/home project or you
+> don't want pay then choose unofficial.

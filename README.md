@@ -27,9 +27,17 @@ Supports now:
 ### :arrow_down: Get It
 > go get github.com/the-go-tools/websearch
 
+And add imports:
+```go
+import (
+    "github.com/the-go-tools/websearch"
+    "github.com/the-go-tools/websearch/provider"
+)
+```
+
 ### :pencil: Configure It
 ```go
-web := New(provider.NewQwant("en_US"))
+web := websearch.New(provider.NewQwant("en_US"))
 ```
 
 ### :checkered_flag: Use It

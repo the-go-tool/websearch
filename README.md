@@ -68,7 +68,7 @@ soon
 ### :star: Please, star it if you find it helpful
 
 ### :link: Similar projects
-If it doesn't fit.
+If this project doesn't fit.
 - :link: https://github.com/serpapi/google-search-results-golang
 - :link: https://github.com/rocketlaunchr/google-search
 - :link: https://github.com/schollz/googleit

@@ -23,7 +23,7 @@ Supports now:
 
 ## :question: Q/A
 
-> **Q:** Should I Uase **unofficial** providers?  
+> **Q:** Should I use **unofficial** providers?  
 > **A:** Maybe. It depends on stability you expect.
 > Official APIs require they token and may take taxes.
 > Unofficial APIs are free, but they are unstable and your

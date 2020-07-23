@@ -8,26 +8,35 @@
 [![GitHub issues](https://img.shields.io/github/issues/the-go-tools/websearch)](https://github.com/the-go-tools/websearch/issues)
 
 # The Go Tools :: Web Search
-> :construction: The tool is in under construction yet
+> :construction: The tool is in under construction and the
+> API can change
 
 The simple tool to use any web search engines like Google, Yandex, Bing,
 Qwant, DuckDuckGo and so on.
 
 Supports now:
-- [X] Qwant
+- [X] Unofficial Qwant
+- [ ] Qwant
+- [ ] Unofficial DuckDuckGo
 - [ ] DuckDuckGo
-- [ ] Google
-- [ ] Yandex
-- [ ] Bing
-- [ ] Yahoo
-- [ ] Other
+- [ ] More: Google, Yandex, Bing, Yahoo etc
+
+## :question: Q/A
+
+> **Q:** Should I Uase **unofficial** providers?  
+> **A:** Maybe. It depends on stability you expect.
+> Official APIs require they token and may take taxes.
+> Unofficial APIs are free, but they are unstable and your
+> IP may be banned for several minutes.
+> So, if you have your personal/home project or you
+> don't want pay then choose unofficial.
 
 ## :fast_forward: Fast Start
 
 ### :arrow_down: Get It
 > go get github.com/the-go-tools/websearch
 
-And add imports:
+Then add imports:
 ```go
 import (
     "github.com/the-go-tools/websearch"

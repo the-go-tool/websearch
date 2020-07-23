@@ -10,19 +10,40 @@
 # The Go Tools :: Web Search
 > :construction: The tool is in under construction yet
 
-:wrench: The simple tool to use any web search engines like Google, Yandex, Bing,
+The simple tool to use any web search engines like Google, Yandex, Bing,
 Qwant, DuckDuckGo and so on.
 
-# :fast_forward: Fast Start
+Supports now:
+- [X] Qwant
+- [ ] DuckDuckGo
+- [ ] Google
+- [ ] Yandex
+- [ ] Bing
+- [ ] Yahoo
+- [ ] Other
 
-## Get It
+## :fast_forward: Fast Start
+
+### :arrow_down: Get It
 > go get github.com/the-go-tools/websearch
 
-## Configure It
-soon
+### :pencil: Configure It
+```go
+web := New(provider.NewQwant("en_US"))
+```
 
-## Use It
-soon
+### :checkered_flag: Use It
+```go
+res, err := web.Search("test", 25)
+// [
+//  { 
+//      Title: string, 
+//      Description: string, 
+//      Link: url.URL, 
+//      Provider: "qwant" 
+//  }, ...
+// ]
+```
 
-# :arrow_forward: More Detailed Start
+## :arrow_forward: More Detailed Start
 soon

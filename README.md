@@ -1,13 +1,13 @@
 [![GitHub](https://img.shields.io/github/license/the-go-tool/websearch)](https://github.com/the-go-tool/websearch/blob/master/LICENSE)
 [![Go version](https://img.shields.io/github/go-mod/go-version/the-go-tool/websearch)](https://blog.golang.org/go1.13)
+[![Build Status](https://travis-ci.com/the-go-tool/websearch.svg?branch=master)](https://travis-ci.com/the-go-tool/websearch)
 [![Go Report Card](https://goreportcard.com/badge/github.com/the-go-tool/websearch)](https://goreportcard.com/report/github.com/the-go-tool/websearch)
-[![code-coverage](http://gocover.io/_badge/github.com/the-go-tool/websearch)](https://gocover.io/github.com/the-go-tool/websearch)
 [![GoDoc](https://godoc.org/github.com/the-go-tool/websearch?status.svg)](https://godoc.org/github.com/the-go-tool/websearch)
 [![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/the-go-tool/websearch)](https://github.com/the-go-tool/websearch/releases)
 [![GitHub last commit](https://img.shields.io/github/last-commit/the-go-tool/websearch)](https://github.com/the-go-tool/websearch/commits/master)
 [![GitHub issues](https://img.shields.io/github/issues/the-go-tool/websearch)](https://github.com/the-go-tool/websearch/issues)
 
-# The Go Tool :: Web Search
+# The Go Tool :: Web Search :mag_right:
 > :construction: The tool is in under construction and the
 > API can change
 

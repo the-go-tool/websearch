@@ -23,7 +23,7 @@ Supports now:
 
 ## :fast_forward: Fast Start
 
-### :arrow_down: Get It
+### Get It
 > go get github.com/the-go-tool/websearch
 
 Then add imports:
@@ -35,19 +35,16 @@ import (
 )
 ```
 
-### :pencil: Configure It
+### Configure It
 ```go
 web := websearch.New(provider.NewUnofficialQwant())
 ```
 
-### :checkered_flag: Use It
+### Use It
 ```go
 res, err := web.Search("test", 25)
 if err != nil {
-    if errors.As(err, &errs.IPBannedError{}) {
-        fmt.Println("your are banned by IP")
-    }
-    panic(err)
+    // ...
 }
 
 fmt.Println(res)
@@ -60,7 +57,43 @@ fmt.Println(res)
 ```
 
 ## :arrow_forward: More Detailed Start
-soon
+
+### Provider Configuration
+Some providers require configuration.
+It can be optional or not.
+If you have a token or any other credentials for official APIs,
+you can pass them by provider config.
+```go
+web := websearch.New(provider.NewUnofficialQwant(provider.UnofficialQwantConfig{
+    Locale: "ru_RU",
+}))
+```
+
+### Error Handling
+The library has several own errors.  
+Every error in websearch wrapped into websearch.Error,
+so you can handle only errors from this library like:
+```go
+res, err := web.Search("test", 25)
+if err != nil {
+    if errors.As(err, &websearch.Error{}) {
+        // ...
+    }
+    // ...
+}
+```
+
+Next, providers have common specific errors.  
+You can get IP ban when use unofficial API and you can check this case so:
+```go
+res, err := web.Search("test", 25)
+if err != nil {
+    if errors.As(err, &errs.IPBannedError{}) {
+        fmt.Println("your are banned by IP")
+    }
+    panic(err)
+}
+```
 
 ## :question: Q/A
 
@@ -74,7 +107,7 @@ soon
 
 ### :star: Please, star it if you find it helpful
 
-### :link: Similar projects
+#### Similar projects
 If this project doesn't fit.
 - :link: https://github.com/serpapi/google-search-results-golang
 - :link: https://github.com/rocketlaunchr/google-search

@@ -31,6 +31,7 @@ Then add imports:
 import (
     "github.com/the-go-tool/websearch"
     "github.com/the-go-tool/websearch/provider"
+    "github.com/the-go-tool/websearch/provider/errs"
 )
 ```
 
@@ -42,14 +43,20 @@ web := websearch.New(provider.NewUnofficialQwant())
 ### :checkered_flag: Use It
 ```go
 res, err := web.Search("test", 25)
-// [
-//  { 
-//      Title: string, 
-//      Description: string, 
-//      Link: url.URL, 
-//      Provider: "unofficial_qwant" 
-//  }, ...
-// ]
+if err != nil {
+    if errors.As(err, &errs.IPBannedError{}) {
+        fmt.Println("your are banned by IP")
+    }
+    panic(err)
+}
+
+fmt.Println(res)
+// [{
+//		Title: string,
+//		Description: string,
+//		Link: url.URL,
+//		Provider: string,
+// },...]
 ```
 
 ## :arrow_forward: More Detailed Start

@@ -36,7 +36,7 @@ import (
 
 ### :pencil: Configure It
 ```go
-web := websearch.New(provider.NewQwant("en_US"))
+web := websearch.New(provider.NewUnofficialQwant())
 ```
 
 ### :checkered_flag: Use It

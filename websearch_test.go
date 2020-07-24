@@ -6,7 +6,7 @@ import (
 )
 
 func TestWebSearch_Search(t *testing.T) {
-	web := New(provider.NewQwant("en_US"))
+	web := New(provider.NewUnofficialQwant())
 	res, err := web.Search("test", 25)
 	if err != nil {
 		t.Fatalf("search error: %s", err)

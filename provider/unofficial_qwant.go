@@ -11,18 +11,32 @@ import (
 	"websearch/provider/errors"
 )
 
-// The Qwant provider name
-const ProviderQwant = ProviderName("qwant")
+// The Unofficial UnofficialQwant provider name
+const ProviderUnofficialQwant = ProviderName("unofficial_qwant")
 
-// The Qwant [https://qwant.com] web search provider
-type Qwant struct {
+// The Unofficial UnofficialQwant [https://qwant.com] web search provider
+type UnofficialQwant struct {
 	api           url.URL
 	defaultParams map[string]string
 	locale        string
 }
 
-// Makes a new Qwant web search provider
-func NewQwant(locale string) Qwant {
+// The config for Unofficial Qwant provider
+type UnofficialQwantConfig struct {
+	Locale string
+}
+
+// Makes a new UnofficialQwant web search provider
+func NewUnofficialQwant(config ...UnofficialQwantConfig) UnofficialQwant {
+	conf := UnofficialQwantConfig{}
+	if len(config) > 0 {
+		conf = config[0]
+	}
+
+	if conf.Locale == "" {
+		conf.Locale = "en_US"
+	}
+
 	api := url.URL{
 		Scheme: "https",
 		Host:   "api.qwant.com",
@@ -32,23 +46,23 @@ func NewQwant(locale string) Qwant {
 		"t":   "web",
 		"uiv": "4",
 	}
-	return Qwant{
+	return UnofficialQwant{
 		api:           api,
 		defaultParams: defaultParams,
-		locale:        locale,
+		locale:        conf.Locale,
 	}
 }
 
 // Makes web search
-func (engine Qwant) Search(query string, maxCount ...int) (Results, error) {
-	const MAX_COUNT_PER_PAGE = 10
+func (engine UnofficialQwant) Search(query string, maxCount ...int) (Results, error) {
+	const maxCountPerPage = 10
 
-	count := MAX_COUNT_PER_PAGE
+	count := maxCountPerPage
 	if len(maxCount) > 0 {
 		count = maxCount[0]
 	}
 
-	if count < 1 || count > 50 {
+	if count < 1 || count > maxCountPerPage * 5 {
 		return nil, fmt.Errorf("incorrect count %d, expect value [1...50]", count)
 	}
 
@@ -65,7 +79,7 @@ func (engine Qwant) Search(query string, maxCount ...int) (Results, error) {
 		func(offset, links, part int) {
 			group.Go(func() error {
 				// Request for page
-				res, err := engine.search(query, offset, int(math.Min(MAX_COUNT_PER_PAGE, float64(links))))
+				res, err := engine.search(query, offset, int(math.Min(maxCountPerPage, float64(links))))
 				if err != nil {
 					return err
 				}
@@ -93,8 +107,8 @@ func (engine Qwant) Search(query string, maxCount ...int) (Results, error) {
 			})
 		}(offset, links, part)
 
-		offset += MAX_COUNT_PER_PAGE
-		links -= MAX_COUNT_PER_PAGE
+		offset += maxCountPerPage
+		links -= maxCountPerPage
 		part++
 	}
 
@@ -104,7 +118,7 @@ func (engine Qwant) Search(query string, maxCount ...int) (Results, error) {
 	}
 
 	// Connecting results from all parts
-	results := make(Results, 0, len(resultsParts)*MAX_COUNT_PER_PAGE)
+	results := make(Results, 0, len(resultsParts)*maxCountPerPage)
 	for i := range resultsParts {
 		results = append(results, resultsParts[i]...)
 	}
@@ -118,17 +132,17 @@ func (engine Qwant) Search(query string, maxCount ...int) (Results, error) {
 }
 
 // Returns provider name
-func (engine Qwant) Name() ProviderName {
-	return ProviderQwant
+func (engine UnofficialQwant) Name() ProviderName {
+	return ProviderUnofficialQwant
 }
 
 // Inner searcher with pagination
-func (engine Qwant) search(query string, offset int, count int) (qwantResults, error) {
+func (engine UnofficialQwant) search(query string, offset int, count int) (unofficialQwantResults, error) {
 	if count > 10 || count < 1 {
-		return qwantResults{}, fmt.Errorf("incorrect count %d, expect value [1...10]", count)
+		return unofficialQwantResults{}, fmt.Errorf("incorrect count %d, expect value [1...10]", count)
 	}
 	if offset > 40 || offset < 0 {
-		return qwantResults{}, fmt.Errorf("incorrect offset %d, expect value [0...40]", offset)
+		return unofficialQwantResults{}, fmt.Errorf("incorrect offset %d, expect value [0...40]", offset)
 	}
 
 	// Merges default params and external
@@ -144,32 +158,32 @@ func (engine Qwant) search(query string, offset int, count int) (qwantResults, e
 	u.RawQuery = helpers.ParamsRender(params)
 
 	// Request
-	results := qwantResults{}
+	results := unofficialQwantResults{}
 	if err := helpers.RequestJSON(&results, u); err != nil {
-		return qwantResults{}, err
+		return unofficialQwantResults{}, err
 	}
 
-	// Handling Qwant errors
+	// Handling UnofficialQwant errors
 	switch results.Data.ErrorCode {
 	case 0: //< All is ok
 	case 429:
-		return qwantResults{}, errors.NewIPBanned(fmt.Errorf("%d", results.Data.ErrorCode))
+		return unofficialQwantResults{}, errors.NewIPBanned(fmt.Errorf("%d", results.Data.ErrorCode))
 	case 14:
-		return qwantResults{}, errors.NewBadRequestError(fmt.Errorf("%d", results.Data.ErrorCode))
+		return unofficialQwantResults{}, errors.NewBadRequestError(fmt.Errorf("%d", results.Data.ErrorCode))
 	default:
-		return qwantResults{}, fmt.Errorf("%d", results.Data.ErrorCode)
+		return unofficialQwantResults{}, fmt.Errorf("%d", results.Data.ErrorCode)
 	}
 
-	// Checks Qwant inner error
+	// Checks UnofficialQwant inner error
 	if results.Data.ErrorCode != 0 {
-		return qwantResults{}, fmt.Errorf("qwant error: %d", results.Data.ErrorCode)
+		return unofficialQwantResults{}, fmt.Errorf("qwant error: %d", results.Data.ErrorCode)
 	}
 
 	return results, nil
 }
 
-// Results of Qwant search
-type qwantResults struct {
+// Results of UnofficialQwant search
+type unofficialQwantResults struct {
 	Data struct {
 		Result struct {
 			Items []struct {

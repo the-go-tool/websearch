@@ -7,7 +7,7 @@
 [![GitHub last commit](https://img.shields.io/github/last-commit/the-go-tool/websearch)](https://github.com/the-go-tool/websearch/commits/master)
 [![GitHub issues](https://img.shields.io/github/issues/the-go-tool/websearch)](https://github.com/the-go-tool/websearch/issues)
 
-# The Go Tool :: Web Search
+# The Go Tool :: Web Search :mag_right:
 > :construction: The tool is in under construction and the
 > API can change
 

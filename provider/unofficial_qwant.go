@@ -8,13 +8,13 @@ import (
 	"strconv"
 	"sync"
 	"websearch/helpers"
-	"websearch/provider/errors"
+	"websearch/provider/errs"
 )
 
-// The Unofficial UnofficialQwant provider name
+// The Unofficial Qwant provider name
 const ProviderUnofficialQwant = ProviderName("unofficial_qwant")
 
-// The Unofficial UnofficialQwant [https://qwant.com] web search provider
+// The Unofficial Qwant [https://qwant.com] web search provider
 type UnofficialQwant struct {
 	api           url.URL
 	defaultParams map[string]string
@@ -26,7 +26,7 @@ type UnofficialQwantConfig struct {
 	Locale string
 }
 
-// Makes a new UnofficialQwant web search provider
+// Makes a new Unofficial Qwant web search provider
 func NewUnofficialQwant(config ...UnofficialQwantConfig) UnofficialQwant {
 	conf := UnofficialQwantConfig{}
 	if len(config) > 0 {
@@ -54,15 +54,10 @@ func NewUnofficialQwant(config ...UnofficialQwantConfig) UnofficialQwant {
 }
 
 // Makes web search
-func (engine UnofficialQwant) Search(query string, maxCount ...int) (Results, error) {
+func (engine UnofficialQwant) Search(query string, count int) (Results, error) {
 	const maxCountPerPage = 10
 
-	count := maxCountPerPage
-	if len(maxCount) > 0 {
-		count = maxCount[0]
-	}
-
-	if count < 1 || count > maxCountPerPage * 5 {
+	if count < 1 || count > maxCountPerPage*5 {
 		return nil, fmt.Errorf("incorrect count %d, expect value [1...50]", count)
 	}
 
@@ -163,18 +158,18 @@ func (engine UnofficialQwant) search(query string, offset int, count int) (unoff
 		return unofficialQwantResults{}, err
 	}
 
-	// Handling UnofficialQwant errors
+	// Handling Unofficial Qwant errs
 	switch results.Data.ErrorCode {
 	case 0: //< All is ok
 	case 429:
-		return unofficialQwantResults{}, errors.NewIPBanned(fmt.Errorf("%d", results.Data.ErrorCode))
+		return unofficialQwantResults{}, errs.NewIPBanned(fmt.Errorf("%d", results.Data.ErrorCode))
 	case 14:
-		return unofficialQwantResults{}, errors.NewBadRequestError(fmt.Errorf("%d", results.Data.ErrorCode))
+		return unofficialQwantResults{}, errs.NewBadRequestError(fmt.Errorf("%d", results.Data.ErrorCode))
 	default:
 		return unofficialQwantResults{}, fmt.Errorf("%d", results.Data.ErrorCode)
 	}
 
-	// Checks UnofficialQwant inner error
+	// Checks Unofficial Qwant inner error
 	if results.Data.ErrorCode != 0 {
 		return unofficialQwantResults{}, fmt.Errorf("qwant error: %d", results.Data.ErrorCode)
 	}
@@ -182,7 +177,7 @@ func (engine UnofficialQwant) search(query string, offset int, count int) (unoff
 	return results, nil
 }
 
-// Results of UnofficialQwant search
+// Results of Unofficial Qwant search
 type unofficialQwantResults struct {
 	Data struct {
 		Result struct {

@@ -47,7 +47,7 @@ res, err := web.Search("test", 25)
 //      Title: string, 
 //      Description: string, 
 //      Link: url.URL, 
-//      Provider: "qwant" 
+//      Provider: "unofficial_qwant" 
 //  }, ...
 // ]
 ```

@@ -17,17 +17,20 @@ func New(provider provider.Provider) *WebSearch {
 }
 
 // Makes web search
-func (webSearch WebSearch) Search(query string, maxCount ...int) (provider.Results, error) {
-	results, err := webSearch.provider.Search(query, maxCount...)
+func (webSearch WebSearch) Search(query string, count ...int) (provider.Results, error) {
+	c := 10
+	if len(count) > 0 {
+		c = count[0]
+	}
+
+	results, err := webSearch.provider.Search(query, c)
 	if err != nil {
 		return nil, NewError(err)
 	}
 
 	// Marks provider
 	for i := range results {
-		results[i].Providers = []provider.ProviderName{
-			webSearch.provider.Name(),
-		}
+		results[i].Provider = webSearch.provider.Name()
 	}
 
 	return results, nil

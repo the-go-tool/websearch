@@ -9,7 +9,7 @@ import (
 	"strings"
 )
 
-// Makes HTTP request, handles errors and parses result
+// Makes HTTP request, handles errs and parses result
 func RequestJSON(result interface{}, url url.URL) error {
 	resp, err := http.Get(url.String())
 	if err != nil {

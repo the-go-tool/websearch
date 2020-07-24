@@ -1,22 +1,28 @@
 package websearch
 
 import (
-	"testing"
+	"errors"
+	"fmt"
 	"websearch/provider"
+	"websearch/provider/errs"
 )
 
-func TestWebSearch_Search(t *testing.T) {
+func ExampleNew_ErrorHandling() {
 	web := New(provider.NewUnofficialQwant())
+
 	res, err := web.Search("test", 25)
 	if err != nil {
-		t.Fatalf("search error: %s", err)
-	}
-	if len(res) != 25 {
-		t.Fatalf("incorrect results count, expect 25, got %d", len(res))
-	}
-	for _, item := range res {
-		if len(item.Title) == 0 {
-			t.Fatalf("empty title")
+		if errors.As(err, &errs.IPBannedError{}) {
+			fmt.Println("your are banned by IP")
 		}
+		panic(err)
 	}
+
+	fmt.Println(res)
+	// [{
+	//		Title: string,
+	//		Description: string,
+	//		Link: url.URL,
+	//		Provider: string,
+	// },...]
 }

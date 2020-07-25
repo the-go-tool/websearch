@@ -4,4 +4,4 @@ go:
   - master
 
 script:
-  - go test ./...
+  - go build ./

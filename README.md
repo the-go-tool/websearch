@@ -16,9 +16,8 @@ Qwant, DuckDuckGo and so on.
 
 Supports now:
 - [X] Unofficial Qwant
-- [ ] Qwant
-- [ ] Unofficial DuckDuckGo
-- [ ] DuckDuckGo
+- [X] Unofficial DuckDuckGo
+- [ ] Unofficial Google
 - [ ] More: Google, Yandex, Bing, Yahoo etc
 
 ## :fast_forward: Fast Start

@@ -20,6 +20,9 @@ Supports now:
 - [ ] Unofficial Google
 - [ ] More: Google, Yandex, Bing, Yahoo etc
 
+I need help. If you know any way to get official Qwant or DuckDuckGo APIs,
+please, make an issue.
+
 ## :fast_forward: Fast Start
 
 ### Get It

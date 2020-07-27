@@ -33,7 +33,7 @@ import (
 
 ### Configure It
 ```go
-web := websearch.New(provider.NewUnofficialQwant())
+web := websearch.New(provider.NewUnofficialDuckDuckGo())
 ```
 
 ### Use It

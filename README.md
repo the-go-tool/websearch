@@ -109,6 +109,10 @@ if err != nil {
 }
 ```
 
+### Your Own Provider
+If you want to use any other isn't presented search provider, then
+you can implement it yourself. Please, use an [interface example](./provider/not_implemented.go).
+
 ## :question: Q/A
 
 > **Q:** Should I use **unofficial** providers?  

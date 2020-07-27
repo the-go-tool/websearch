@@ -8,17 +8,15 @@
 [![GitHub issues](https://img.shields.io/github/issues/the-go-tool/websearch)](https://github.com/the-go-tool/websearch/issues)
 
 # The Go Tool :: Web Search :mag_right:
-> :construction: The tool is in under construction and the
-> API can change
 
-This is simple tool to use any web search engines like Google, Yandex, Bing,
+This is a simple tool to use any web search engines like Google, Yandex, Bing,
 Qwant, DuckDuckGo and so on.
 
 Supports now:
 - [X] Unofficial Qwant
 - [X] Unofficial DuckDuckGo
 - [ ] Unofficial Google
-- [ ] More: Google, Yandex, Bing, Yahoo etc
+- [ ] More: Official Google, Yandex, Bing, Yahoo, Baidu, Shenma, Haoso, Sogou etc
 
 I need help. If you know any way to get official Qwant or DuckDuckGo APIs,
 please, make an issue.
@@ -32,14 +30,13 @@ Then add imports:
 ```go
 import (
     "github.com/the-go-tool/websearch"
-    "github.com/the-go-tool/websearch/provider"
-    "github.com/the-go-tool/websearch/provider/errs"
+    "github.com/the-go-tool/websearch/provider"    
 )
 ```
 
 ### Configure It
 ```go
-web := websearch.New(provider.NewUnofficialQwant())
+web := websearch.New(provider.NewUnofficialDuckDuckGo())
 ```
 
 ### Use It
@@ -59,6 +56,19 @@ fmt.Println(res)
 ```
 
 ## :arrow_forward: More Detailed Start
+
+### Modules Importing
+You will need to import several modules.  
+- `websearch` The main package with websearch wrapper.
+- `provider` Contains several web search providers for Qwant, DuckDuckGo, Google etc.
+- `errs` Contains provider's errors
+```go
+import (
+    "github.com/the-go-tool/websearch"
+    "github.com/the-go-tool/websearch/provider"
+    "github.com/the-go-tool/websearch/provider/errs"
+)
+```
 
 ### Provider Configuration
 Some providers require configuration.

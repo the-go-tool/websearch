@@ -12,6 +12,8 @@
 This is a simple tool to use any web search engines like Google, Yandex, Bing,
 Qwant, DuckDuckGo and so on.
 
+![](./assets/providers.jpg)
+
 Supports now:
 - [X] Unofficial Qwant
 - [X] Unofficial DuckDuckGo
@@ -124,3 +126,6 @@ If this project doesn't fit.
 - :link: https://github.com/serpapi/google-search-results-golang
 - :link: https://github.com/rocketlaunchr/google-search
 - :link: https://github.com/schollz/googleit
+
+
+[]: ./assets/providers.jpg

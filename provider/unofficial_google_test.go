@@ -2,9 +2,9 @@ package provider
 
 import "testing"
 
-func TestNewUnofficialQwant(t *testing.T) {
-	uqwant := NewUnofficialQwant()
-	res, err := uqwant.Search("test", 25)
+func TestNewUnofficialGoogle(t *testing.T) {
+	ugoogle := NewUnofficialGoogle()
+	res, err := ugoogle.Search("test", 25)
 	if err != nil {
 		t.Errorf("search error: %s", err)
 	}

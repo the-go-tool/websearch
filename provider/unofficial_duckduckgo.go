@@ -1,9 +1,11 @@
 package provider
 
 import (
+	"errors"
 	"github.com/PuerkitoBio/goquery"
 	"net/url"
 	"websearch/helpers"
+	"websearch/provider/errs"
 )
 
 // The unofficial DuckDuckGo provider name
@@ -98,6 +100,9 @@ func (engine UnofficialDuckDuckGo) nextSearch(form map[string]string) (Results, 
 	// Fetching next page params
 	paramsNext := map[string]string{}
 	navLinks := doc.Find(".nav-link")
+	if navLinks.Length() == 0 {
+		return nil, nil, errs.NewTechnical(errors.New("can't find any nav-link, try again"))
+	}
 	navLink := navLinks.Get(0)
 	if navLinks.Length() == 2 {
 		navLink = navLinks.Get(1)

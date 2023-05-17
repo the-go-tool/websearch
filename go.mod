@@ -1,4 +1,4 @@
-module websearch
+module github.com/the-go-tool/websearc
 
 go 1.14
 
